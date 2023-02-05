@@ -1,3 +1,4 @@
+from numpy import np
 class KNearestNeighbor(object):
 
   def __init__(self):
