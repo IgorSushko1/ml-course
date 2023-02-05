@@ -22,7 +22,7 @@ class KNearestNeighbor(object):
     return self.predict_labels(dists, k=k)
 
   def compute_distances_two_loops(self, X):
-
+        """
         Returns:
         - dists: A numpy array of shape (num_test, num_train) where dists[i, j]
           is the Euclidean distance between the ith test point and the jth training
@@ -45,7 +45,7 @@ class KNearestNeighbor(object):
                 """*****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****"""
         return dists
 
-    def compute_distances_one_loop(self, X):
+  def compute_distances_one_loop(self, X):
         """
         Compute the distance between each test point in X and each training point
         in self.X_train using a single loop over the test data.
@@ -69,15 +69,14 @@ class KNearestNeighbor(object):
         return dists
 
   def compute_distances_no_loops(self, X):
-
+        """
         Input / Output: Same as compute_distances_two_loops
         """
         num_test = X.shape[0]
         num_train = self.X_train.shape[0]
         dists = np.zeros((num_test, num_train))
 
-        """########################################################################
-        TODO:                                                                
+        """   TODO:                                                                
         Compute the l2 distance between all test points and all training     
         points without using any explicit loops, and store the result in     
         dists.                                                               
@@ -87,8 +86,8 @@ class KNearestNeighbor(object):
         nor use np.linalg.norm().                                            
                                                                              
         HINT: Try to formulate the l2 distance using matrix multiplication   
-              and two broadcast sums.                                        
-        ########################################################################
+          and two broadcast sums.     '''''                                   
+    
         ***START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)***** """
 
         dists = np.sqrt(np.sum(X**2, axis=1)[:, np.newaxis] + np.sum(self.X_train**2, axis=1) - 2 * np.dot(X, self.X_train.T))
@@ -96,7 +95,7 @@ class KNearestNeighbor(object):
         return dists
 
   def predict_labels(self, dists, k=1):
-
+        """
         Returns:
         - y: A numpy array of shape (num_test,) containing predicted labels for the
           test data, where y[i] is the predicted label for the test point X[i].
@@ -128,8 +127,20 @@ class KNearestNeighbor(object):
 
             """*****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****"""
 
-    return y_pred
-
+        return y_pred
+  def fit(self, X, y):
+          """
+          Train the classifier. For k-nearest neighbors this is just
+          memorizing the training data.
+          Inputs:
+          - X: A numpy array of shape (num_train, D) containing the training data
+            consisting of num_train samples each of dimension D.
+          - y: A numpy array of shape (N,) containing the training labels, where
+              y[i] is the label for X[i].
+          """
+          self.X_train = X
+          self.y_train = y
+          
 from k_nearest_neighbor import KNearestNeighbor
 classifier = KNearestNeighbor()
 classifier.fit(X_train, y_train)
