@@ -1,5 +1,3 @@
-import numpy as np
-
 class KNearestNeighbor(object):
 
   def __init__(self):
@@ -35,6 +33,9 @@ class KNearestNeighbor(object):
 
     return dists
 
+  def fit(self, X, y):
+        self.X_train = X
+        self.y_train = y
   def compute_distances_one_loop(self, X):
     num_test = X.shape[0]
     num_train = self.X_train.shape[0]
