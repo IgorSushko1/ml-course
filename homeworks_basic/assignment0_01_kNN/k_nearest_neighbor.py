@@ -1,4 +1,4 @@
-from numpy import np
+import numpy as np
 class KNearestNeighbor(object):
 
   def __init__(self):
@@ -142,6 +142,6 @@ class KNearestNeighbor(object):
           self.X_train = X
           self.y_train = y
 
-# from k_nearest_neighbor import KNearestNeighbor
-# classifier = KNearestNeighbor()
-# classifier.fit(X_train, y_train)
+from k_nearest_neighbor import KNearestNeighbor
+classifier = KNearestNeighbor()
+classifier.fit(X_train, y_train)
